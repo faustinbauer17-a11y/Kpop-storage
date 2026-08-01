@@ -1,0 +1,378 @@
+/* ============================================================
+   KPOP STORAGE — stylesheet v2
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    --bg: #07090a;
+    --ink: #f3f5f4;
+    --muted: #9aa39e;
+    --line: rgba(255,255,255,0.08);
+    --card: #14181a;
+    --card-line: rgba(255,255,255,0.09);
+    --accent: #1a7a24;
+    --radius: 14px;
+    --serif-display: 'Space Grotesk', 'Gill Sans', 'Gill Sans MT', sans-serif;
+    --body: 'Inter', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    line-height: 1.6;
+    background:
+        radial-gradient(ellipse 900px 500px at 15% -10%, rgba(26,122,36,0.16), transparent 60%),
+        radial-gradient(ellipse 700px 500px at 100% 0%, rgba(255,255,255,0.05), transparent 55%),
+        var(--bg);
+    min-height: 100vh;
+}
+
+main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 1.5rem 5rem;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+::selection { background: var(--accent); color: #fff; }
+
+/* ---------- Header / Nav ---------- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(7,9,10,0.78);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    padding: 0.9rem 1.5rem;
+}
+
+header h1 {
+    font-family: var(--serif-display);
+    font-size: 1.15rem;
+    letter-spacing: 0.14em;
+    margin: 0 0 0.6rem;
+    font-weight: 700;
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header h1::before {
+    content: "\25C6 ";
+    color: var(--accent);
+}
+
+nav { max-width: 880px; margin: 0 auto; }
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+nav li { display: inline; }
+
+nav a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    transition: color 0.2s ease;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+}
+
+nav a:hover, nav a.current {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+}
+
+nav hr { display: none; }
+
+/* ---------- Gallery (index) ---------- */
+.gallery-intro { padding-top: 2.5rem; }
+.gallery-intro .eyebrow {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    font-weight: 600;
+}
+.gallery-intro h2 { font-family: var(--serif-display); font-size: 2.1rem; margin: 0.3rem 0 0.3rem; }
+.gallery-intro p { color: var(--muted); margin-top: 0; max-width: 40em; }
+
+/* Roster list — a numbered index rather than a fake photo grid,
+   since there are no member photos to back a card layout with. */
+.roster {
+    margin: 2rem 0 1rem;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--card-line);
+}
+
+.roster li { border-bottom: 1px solid var(--card-line); }
+
+.tile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 0.6rem;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: background 0.2s ease, border-color 0.2s ease, padding-left 0.2s ease;
+}
+
+.tile:hover, .tile:focus-visible {
+    background: rgba(255,255,255,0.03);
+    border-left-color: var(--accent);
+    padding-left: 1rem;
+}
+
+.tile .index-no {
+    font-family: var(--serif-display);
+    font-size: 0.75rem;
+    color: var(--muted);
+    width: 1.6rem;
+    flex-shrink: 0;
+}
+
+.tile .monogram {
+    min-width: 46px;
+    height: 46px;
+    padding: 0 6px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: var(--tile-grad, linear-gradient(155deg, var(--accent), #000));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+}
+
+.tile .tile-label { flex: 1; min-width: 0; }
+
+.tile .tile-name {
+    display: block;
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #fff;
+    letter-spacing: 0.01em;
+}
+
+.tile .tile-tag {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.1rem;
+}
+
+.tile .arrow {
+    font-family: var(--serif-display);
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.tile:hover .arrow, .tile:focus-visible .arrow { opacity: 1; transform: translateX(0); }
+
+/* ---------- Group page hero ---------- */
+.group-page { --accent: #1a7a24; }
+
+.hero {
+    margin: 1.6rem 0 2.2rem;
+    padding: 2.4rem 1.6rem;
+    border-radius: var(--radius);
+    background: var(--hero-grad, linear-gradient(155deg, #000, var(--accent), #000));
+    border: 1px solid var(--card-line);
+    text-align: center;
+}
+
+.hero .eyebrow { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(255,255,255,0.7); }
+.hero h2 { font-family: var(--serif-display); font-size: 3rem; margin: 0.3rem 0 0.6rem; line-height: 1; }
+.hero .tagline { font-style: italic; color: rgba(255,255,255,0.85); max-width: 34em; margin: 0 auto; }
+
+.hero .meta-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.9rem;
+    margin-top: 1.2rem;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.75);
+}
+
+.hero .meta-row span { white-space: nowrap; }
+.hero .meta-row span::before { content: "\00b7 "; opacity: 0.6; }
+.hero .meta-row span:first-child::before { content: ""; }
+
+/* ---------- Section headers ---------- */
+h3.section-title {
+    font-family: var(--serif-display);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent, #1a7a24);
+    margin: 2.6rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+h3.section-title::after { content: ""; flex: 1; height: 1px; background: var(--card-line); }
+
+/* ---------- Bio ---------- */
+.bio p { color: #d7dbd9; }
+
+/* ---------- Members ---------- */
+.member-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.8rem;
+    margin: 0 0 1rem;
+}
+
+.member-card {
+    background: var(--card);
+    border: 1px solid var(--card-line);
+    border-radius: var(--radius);
+    padding: 1rem 0.9rem 1.1rem;
+    text-align: center;
+}
+
+.member-card .avatar {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 0.7rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.member-card .avatar-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif-display);
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: rgba(255,255,255,0.92);
+    background: var(--avatar-grad, linear-gradient(160deg, var(--accent), #000));
+}
+
+.member-card h4 { margin: 0 0 0.15rem; font-size: 0.98rem; }
+.member-card .role { font-size: 0.78rem; color: var(--accent, #7fd88a); font-weight: 600; margin: 0; }
+.member-card .vibe { font-size: 0.78rem; color: var(--muted); margin: 0.15rem 0 0; font-style: italic; }
+.member-card .years { font-size: 0.72rem; color: var(--muted); margin-top: 0.4rem; opacity: 0.8; }
+
+/* ---------- Discography ---------- */
+.disco-list { margin: 0 0 1.4rem; padding: 0; list-style: none; }
+
+.disco-item {
+    border-left: 2px solid var(--card-line);
+    padding: 0.15rem 0 0.9rem 1rem;
+    margin-left: 0.2rem;
+}
+
+.disco-item .year { font-family: var(--serif-display); font-weight: 700; color: var(--accent, #7fd88a); font-size: 0.85rem; }
+.disco-item .title { font-weight: 600; margin-left: 0.4rem; }
+.disco-item p { color: var(--muted); font-size: 0.9rem; margin: 0.3rem 0 0; }
+
+.disco-item ul.tracklist {
+    margin: 0.4rem 0 0;
+    padding-left: 1.1rem;
+    color: #b9c0bd;
+    font-size: 0.85rem;
+}
+
+.disco-sub {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin: 1.2rem 0 0.4rem;
+}
+
+/* ---------- Generic cards (about, legacy pages) ---------- */
+.card { background: var(--card); border-radius: var(--radius); padding: 1.25rem 1.4rem; border: 1px solid var(--card-line); margin: 1rem 0; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 1.5rem 0; }
+.card-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 6px; }
+.card-text { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
+
+/* legacy classes from v1 kept so old pages (txt.html, enhypen.html) still render correctly */
+.member { width: 30%; display: inline-block; height: auto; border-radius: 0.5em; margin: 1em 0.5%; text-align: left; box-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
+.group { width: 100%; display: block; height: auto; border-radius: 0.5em; margin: 1em 0; text-align: center; box-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
+.album-cover { width: 50%; display: inline-block; height: auto; border-radius: 0.5em; margin: 1em auto; text-align: left; box-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
+.txt-group { background: linear-gradient(to bottom, #000, #62abf5, #127798, #127798, #62abf5, #000); padding: 1.4em 1.2em; border-radius: var(--radius); }
+.enhypen-group { background: linear-gradient(to bottom, #000, #570335, #000, #000, #570335, #000); padding: 1.4em 1.2em; border-radius: var(--radius); }
+h4 { color: white; text-align: center; }
+
+/* ---------- About page ---------- */
+.page-title { font-family: var(--serif-display); font-size: 1.8rem; margin: 2.2rem 0 0.6rem; }
+
+/* ---------- Footer ---------- */
+footer {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    border-top: 1px solid var(--line);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+    .hero h2 { font-size: 2.2rem; }
+    .tile .tile-name { font-size: 1rem; }
+    .tile .monogram { width: 40px; height: 40px; font-size: 1rem; }
+    .member { width: 47%; }
+}
+
+/* ---------- Accessibility ---------- */
+a:focus-visible, .tile:focus-visible { outline: 2px solid var(--accent, #7fd88a); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}
+
+/* ============================================================
+   Per-group color themes
+   ============================================================ */
+.theme-txt         { --accent: #62abf5; --tile-grad: linear-gradient(155deg,#000,#127798,#000); --hero-grad: linear-gradient(155deg,#000,#127798,#062634,#000); }
+.theme-enhypen     { --accent: #d9679a; --tile-grad: linear-gradient(155deg,#000,#570335,#000); --hero-grad: linear-gradient(155deg,#000,#570335,#1a0210,#000); }
+.theme-ateez       { --accent: #e0b23c; --tile-grad: linear-gradient(155deg,#120303,#3a0d0d,#000); --hero-grad: linear-gradient(155deg,#120303,#3a0d0d,#1c0a02,#000); }
+.theme-straykids   { --accent: #ff4d4d; --tile-grad: linear-gradient(155deg,#050505,#5a1010,#000); --hero-grad: linear-gradient(155deg,#050505,#7a1414,#1a0505,#000); }
+.theme-plave       { --accent: #b79bff; --tile-grad: linear-gradient(155deg,#0a0620,#2c1a5c,#000); --hero-grad: linear-gradient(155deg,#0a0620,#3a2280,#160a30,#000); }
+.theme-p1harmony   { --accent: #4ed2c6; --tile-grad: linear-gradient(155deg,#020a09,#0f4a44,#000); --hero-grad: linear-gradient(155deg,#020a09,#12554e,#031a17,#000); }
+.theme-oneus       { --accent: #c9a4ff; --tile-grad: linear-gradient(155deg,#0a0210,#3d1450,#000); --hero-grad: linear-gradient(155deg,#0a0210,#4a1860,#160522,#000); }
+.theme-babymonster { --accent: #ff6f9c; --tile-grad: linear-gradient(155deg,#0a0006,#4a0620,#000); --hero-grad: linear-gradient(155deg,#0a0006,#5c0828,#1a0210,#000); }
+.theme-ald1        { --accent: #3fb8ff; --tile-grad: linear-gradient(155deg,#000a10,#0a3a55,#000); --hero-grad: linear-gradient(155deg,#000a10,#0d4a6e,#02141d,#000); }
